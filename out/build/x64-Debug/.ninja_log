@@ -1,0 +1,5 @@
+# ninja log v5
+8	96	7482063233041030	CMakeFiles/DianGit.dir/src/main.c.obj	c7f427813f76c06
+20	307	7482063235145131	CMakeFiles/DianGit.dir/src/init.c.obj	31213d752792981f
+6	296	7482063457610527	CMakeFiles/DianGit.dir/src/init.c.obj	31213d752792981f
+297	1193	7482063462235425	DianGit.exe	83d12d23346031c1
