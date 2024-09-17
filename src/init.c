@@ -38,6 +38,35 @@ int directory_exists(const char* dir) {
     return stat(dir, &st) == 0 && IS_DIR(st.st_mode);
 }
 
+//创建目录并确保所有父目录都存在
+int create_directory(const char* dir) {
+    char path[256] = { 0 };
+	char* p = path;
+	const char* q = dir;
+
+	while (*q) {
+		if (*q == '/' || *q == '\\') {
+			*p = '\0';
+			if (MKDIR(path) != 0) {
+				if (errno != EEXIST) {
+					perror("Failed to create directory");
+					return -1;
+				}
+			}
+		}
+		*p++ = *q++;
+	}
+
+	if (MKDIR(path) != 0) {
+		if (errno != EEXIST) {
+			perror("Failed to create directory");
+			return -1;
+		}
+	}
+
+	return 0;
+}
+
 // 初始化 Git 仓库
 void init_repository(const char* dir) {
     char path[256];
@@ -74,7 +103,7 @@ void init_repository(const char* dir) {
     const char* subdirs[] = { "hooks", "info", "objects/info", "objects/pack", "refs/heads", "refs/tags" };
     for (int i = 0; i < 6; i++) {
         snprintf(path, sizeof(path), "%s/.git/%s", dir, subdirs[i]);
-        if (MKDIR(path) != 0) {
+        if (create_directory(path) != 0) {
             perror("Failed to create subdirectory");
             return;
         }
