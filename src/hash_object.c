@@ -6,8 +6,6 @@
 #include <header/hash_object.h>
 #include <diangit.h>
 
-#define HASH_LEN 20 // SHA-1 输出 20 字节
-#define CHUNK 16384
 
 // 读取文件并返回其内容
 char* read_file(const char* filename, size_t* file_len) {
@@ -93,17 +91,17 @@ void store_object(const char* hash, const char* compressed_data, size_t compress
     }
 
     // 创建对象文件
-    create_file(file, compressed_data);
-    //FILE* f = fopen(file, "wb");
-    //if (!f) {
-    //    perror("Failed to create object file");
-    //    return;
-    //}
+    // create_file(file, compressed_data);
+    FILE* f = fopen(file, "wb");
+    if (!f) {
+        perror("Failed to create object file");
+        return;
+    }
 
-    //// fwrite(compressed_data, 1, compressed_len, f);
+    fwrite(compressed_data, 1, compressed_len, f);
     //if (compressed_data)
     //    fput(compressed_data, f);
-    //fclose(f);
+    fclose(f);
     printf("Object stored: %s\n", file);
 }
 

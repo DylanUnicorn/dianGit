@@ -130,6 +130,14 @@ build src\CMakeFiles\my_modules.dir\hash_object.c.obj: C_COMPILER__my_modules_un
   TARGET_COMPILE_PDB = src\CMakeFiles\my_modules.dir\my_modules.pdb
   TARGET_PDB = src\my_modules.pdb
 
+build src\CMakeFiles\my_modules.dir\cat_file.c.obj: C_COMPILER__my_modules_unscanned_Debug E$:\Hust\Memo\oneDianDian\dianGit\src\cat_file.c || cmake_object_order_depends_target_my_modules
+  FLAGS = /DWIN32 /D_WINDOWS /Ob0 /Od /RTC1 -MDd -Zi
+  INCLUDES = -IE:\Hust\Memo\oneDianDian\dianGit\include -IE:\.vcpkg\installed\x64-windows\include
+  OBJECT_DIR = src\CMakeFiles\my_modules.dir
+  OBJECT_FILE_DIR = src\CMakeFiles\my_modules.dir
+  TARGET_COMPILE_PDB = src\CMakeFiles\my_modules.dir\my_modules.pdb
+  TARGET_PDB = src\my_modules.pdb
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target my_modules
@@ -138,7 +146,7 @@ build src\CMakeFiles\my_modules.dir\hash_object.c.obj: C_COMPILER__my_modules_un
 #############################################
 # Link the static library src\my_modules.lib
 
-build src\my_modules.lib: C_STATIC_LIBRARY_LINKER__my_modules_Debug src\CMakeFiles\my_modules.dir\init.c.obj src\CMakeFiles\my_modules.dir\hash_object.c.obj
+build src\my_modules.lib: C_STATIC_LIBRARY_LINKER__my_modules_Debug src\CMakeFiles\my_modules.dir\init.c.obj src\CMakeFiles\my_modules.dir\hash_object.c.obj src\CMakeFiles\my_modules.dir\cat_file.c.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = src\CMakeFiles\my_modules.dir

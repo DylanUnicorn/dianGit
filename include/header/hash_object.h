@@ -2,6 +2,10 @@
 #define __HASH_OBJECT_H__
 
 #include "init.h"
+
+#define HASH_LEN 20 // SHA-1 Êä³ö 20 ×Ö½Ú
+#define CHUNK 16384
+
 char* read_file(const char* filename, size_t* file_len);
 void compute_sha1(const char* data, size_t data_len, unsigned char* hash_out);
 int compress_data(const char* input, size_t input_len, char** output, size_t* output_len);

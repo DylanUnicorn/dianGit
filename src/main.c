@@ -22,6 +22,13 @@ int main(int argc, char* argv[]) {
 		}
 		hash_object(argv[2]);
 	}
+    else if (strcmp(argv[1], "cat-file") == 0) {
+        if (argc < 3) {
+            printf("Usage: %s cat-file <hash>\n", argv[0]);
+            return 1;
+        }
+        cat_file(argv[2]);
+    }
     else {
         printf("Unknown command: %s\n", argv[1]);
     }

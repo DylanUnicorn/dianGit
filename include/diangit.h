@@ -16,6 +16,7 @@
 #endif
 #include<header/hash_object.h>
 #include<header/init.h>
+#include<header/cat_file.h>
 
 #endif // !_DIANGIT_H_
 
