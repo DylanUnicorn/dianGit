@@ -1,8 +1,6 @@
 # ninja log v5
-8	96	7482063233041030	CMakeFiles/DianGit.dir/src/main.c.obj	c7f427813f76c06
-6	296	7482063457610527	CMakeFiles/DianGit.dir/src/init.c.obj	31213d752792981f
-297	1193	7482063462235425	DianGit.exe	83d12d23346031c1
-2	19	0	clean	8c45b54705a541e8
-3	429	7482478196584732	CMakeFiles/DianGit.dir/src/main.c.obj	c7f427813f76c06
-3	296	7482478369699367	CMakeFiles/DianGit.dir/src/init.c.obj	31213d752792981f
-298	2462	7482478378668981	DianGit.exe	83d12d23346031c1
+4	339	7484513742726493	CMakeFiles/diangit.dir/src/main.c.obj	717f853418b02068
+13	345	7484513742785087	src/CMakeFiles/my_modules.dir/init.c.obj	7716aad97b1dfa84
+3	313	7484517097585083	src/CMakeFiles/my_modules.dir/hash_object.c.obj	4fa1dc285dc7e20a
+314	417	7484517098483437	src/my_modules.lib	c1c56a14e57ff871
+417	1324	7484517101108607	diangit.exe	688ec39371f675ef

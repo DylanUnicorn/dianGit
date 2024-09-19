@@ -3,20 +3,9 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <string.h>
-#include "init.h"
+#include <header/init.h>
+#include <diangit.h>
 
-#ifdef _WIN32
-#include <direct.h>
-#define MKDIR(dir) _mkdir(dir)
-#define ACCESS _access
-#include<Windows.h>
-#define IS_DIR(attrs) (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY))
-#else
-#include <unistd.h>
-#define MKDIR(dir) mkdir(dir, 0755)
-#define ACCESS access
-#define IS_DIR(mode) (attrs != -1 && S_ISDIR(mode))
-#endif
 
 // 创建文件并写入内容
 void create_file(const char* path, const char* content) {

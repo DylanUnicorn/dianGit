@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "diangit.h"
+#include <diangit.h>
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -14,7 +14,14 @@ int main(int argc, char* argv[]) {
             return 1;
         }
         init_repository(argv[2]);
-    }
+	}
+	else if (strcmp(argv[1], "hash-object") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s hash-object <file>\n", argv[0]);
+			return 1;
+		}
+		hash_object(argv[2]);
+	}
     else {
         printf("Unknown command: %s\n", argv[1]);
     }
