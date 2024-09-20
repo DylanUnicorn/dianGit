@@ -1,4 +1,5 @@
 # include <header/cat_file.h>
+#include <diangit.h>
 
 // ½âÑ¹Êı¾İ
 int decompress_data(const char* input, size_t input_len, char** output, size_t* output_len) {

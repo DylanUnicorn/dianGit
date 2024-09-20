@@ -38,7 +38,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 9,
+				"line" : 13,
 				"parent" : 0
 			},
 			{
@@ -53,7 +53,7 @@
 			{
 				"command" : 2,
 				"file" : 2,
-				"line" : 20,
+				"line" : 19,
 				"parent" : 3
 			}
 		]
@@ -91,7 +91,11 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3,
+				4,
+				5,
+				6
 			]
 		}
 	],
@@ -111,7 +115,11 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3,
+				4,
+				5,
+				6
 			]
 		}
 	],
@@ -133,6 +141,30 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
 			"path" : "src/cat_file.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "src/gettime.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "src/dirPro.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "src/commit.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "src/gitlog.c",
 			"sourceGroupIndex" : 0
 		}
 	],

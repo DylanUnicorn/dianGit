@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <diangit.h>
+#include <main.h>
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -29,9 +29,25 @@ int main(int argc, char* argv[]) {
         }
         cat_file(argv[2]);
     }
+	else if (strcmp(argv[1], "commit") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s commit <message>\n", argv[0]);
+			return 1;
+		}
+		commit_all(argv[2]);
+	}
+	else if (strcmp(argv[1], "log") == 0) {
+		if (argc > 2) {
+			printf("Usage: %s log\n", argv[0]);
+			return 1;
+		}
+        display_log();
+	}
     else {
         printf("Unknown command: %s\n", argv[1]);
     }
 
     return 0;
 }
+
+

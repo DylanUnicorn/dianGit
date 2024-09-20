@@ -8,7 +8,8 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1
+						1,
+						2
 					],
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
@@ -34,6 +35,21 @@
 					"source" : "src",
 					"targetIndexes" : 
 					[
+						2
+					]
+				},
+				{
+					"build" : "test",
+					"jsonFile" : "directory-test-Debug-f18be1977b403cfd1a50.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "test",
+					"targetIndexes" : 
+					[
 						1
 					]
 				}
@@ -45,13 +61,15 @@
 					"directoryIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					],
 					"name" : "diangit",
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -60,14 +78,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "diangit::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-diangit-Debug-74225e4e78e5b320a61b.json",
+					"jsonFile" : "target-diangit-Debug-096e04162979c08bec84.json",
 					"name" : "diangit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dir::@36f028580bb02cc8272a",
+					"jsonFile" : "target-dir-Debug-8ac1bbf1661d4833f133.json",
+					"name" : "dir",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "my_modules::@145eef247bfb46b6828c",
-					"jsonFile" : "target-my_modules-Debug-dc43077149cc7efd8dd9.json",
+					"jsonFile" : "target-my_modules-Debug-137098a39f057e2698b0.json",
 					"name" : "my_modules",
 					"projectIndex" : 0
 				}

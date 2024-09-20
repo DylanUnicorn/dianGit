@@ -3,6 +3,10 @@ set(SOURCES
     init.c
     hash_object.c
     cat_file.c
+    gettime.c
+    dirPro.c
+    commit.c
+    gitlog.c
 )
 
 # ´´½¨¾²Ì¬¿â

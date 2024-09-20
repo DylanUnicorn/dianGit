@@ -3,20 +3,32 @@
 
 
 #ifdef _WIN32
-#include <direct.h>
-#define MKDIR(dir) _mkdir(dir)
-#define ACCESS _access
-#include<Windows.h>
-#define IS_DIR(attrs) (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY))
+	#include <direct.h>
+	#define MKDIR(dir) _mkdir(dir)
+	#define ACCESS _access
+	#include <Windows.h>
+	#include <io.h>
+	#include <tchar.h>
+	#define IS_DIR(attrs) (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY))
+	#define S_ISDIR(mode)  (((mode) & S_IFMT) == S_IFDIR)
+	#define S_ISREG(mode)  (((mode) & S_IFMT) == S_IFREG)
 #else
-#include <unistd.h>
-#define MKDIR(dir) mkdir(dir, 0755)
-#define ACCESS access
-#define IS_DIR(mode) (attrs != -1 && S_ISDIR(mode))
+	#include <unistd.h>
+	#include <sys/stat.h>
+	#include <direct.h>
+	#define MKDIR(dir) mkdir(dir, 0755)
+	#define ACCESS access
+	#define IS_DIR(mode) (attrs != -1 && S_ISDIR(mode))
 #endif
-#include<header/hash_object.h>
-#include<header/init.h>
-#include<header/cat_file.h>
+
+
+#ifdef _WIN32
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <sys/stat.h>
+	#include <errno.h>
+	#include <string.h>
+#endif
 
 #endif // !_DIANGIT_H_
 

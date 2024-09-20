@@ -1,14 +1,13 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(diangit
-		VERSION 1.0.1
-		DESCRIPTION "A simple git implementation"
-		LANGUAGES C
+        VERSION 1.0.1
+        DESCRIPTION "A simple git implementation"
+        LANGUAGES C
 )
 
 # 设置C标准
 set(CMAKE_C_STANDARD 99)
-
 
 # 设置vcpkg路径
 set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
@@ -27,4 +26,6 @@ add_subdirectory(src)
 add_executable(diangit src/main.c)
 
 # 链接第三方库
-target_link_libraries(diangit my_modules ZLIB::ZLIB ${OPENSSL_LIBRARIES})
+target_link_libraries(diangit PUBLIC my_modules ZLIB::ZLIB ${OPENSSL_LIBRARIES})
+
+add_subdirectory(test)

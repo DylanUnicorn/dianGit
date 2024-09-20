@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <openssl/sha.h>
 #include <zlib.h>
 #include <header/hash_object.h>
@@ -78,7 +75,7 @@ int compress_data(const char* input, size_t input_len, char** output, size_t* ou
     return Z_OK;
 }
 
-// 存储压缩的 Git 对象
+
 void store_object(const char* hash, const char* compressed_data, size_t compressed_len) {
     char path[256], dir[256], file[256];
     snprintf(dir, sizeof(dir), ".git/objects");
@@ -105,8 +102,81 @@ void store_object(const char* hash, const char* compressed_data, size_t compress
     printf("Object stored: %s\n", file);
 }
 
+// 计算文件的哈希值,给与返回值
+void hashData(const char* filename, char* hash_out) {
+	size_t file_len;
+	char* file_content = read_file(filename, &file_len);
+	if (!file_content) {
+		return;
+	}
+
+	// 计算哈希值
+	char header[64];
+	snprintf(header, sizeof(header), "blob %zu", file_len);
+	size_t header_len = strlen(header) + 1;
+
+	size_t total_len = header_len + file_len;
+	char* data = malloc(total_len);
+	memcpy(data, header, header_len);
+	memcpy(data + header_len, file_content, file_len);
+
+	unsigned char hash[HASH_LEN];
+	compute_sha1(data, total_len, hash);
+
+	// 输出哈希值
+	for (int i = 0; i < HASH_LEN; ++i) {
+		snprintf(hash_out + i * 2, 3, "%02x", hash[i]);
+	}
+
+	free(file_content);
+	free(data);
+}
+
+
+char* create_blob_object(const char* filename) {
+	size_t file_len;
+	char* file_content = read_file(filename, &file_len);
+	if (!file_content) {
+		return NULL;
+	}
+
+	// 计算哈希值
+	char header[64];
+	snprintf(header, sizeof(header), "blob %zu", file_len);
+	size_t header_len = strlen(header) + 1;
+
+	size_t total_len = header_len + file_len;
+	char* data = malloc(total_len);
+	memcpy(data, header, header_len);
+	memcpy(data + header_len, file_content, file_len);
+
+	unsigned char hash[HASH_LEN];
+	compute_sha1(data, total_len, hash);
+
+	// 输出哈希值
+	char* hash_out = malloc(41);
+	for (int i = 0; i < HASH_LEN; ++i) {
+		snprintf(hash_out + i * 2, 3, "%02x", hash[i]);
+	}
+
+    // 压缩数据
+    char* compressed_data = NULL;
+    size_t compressed_len = 0;
+    if (compress_data(data, total_len, &compressed_data, &compressed_len) == Z_OK) {
+        store_object(hash_out, compressed_data, compressed_len);
+    }
+
+	free(file_content);
+	free(data);
+	return hash_out;
+}
+
+
 // hash-object 功能
 void hash_object(const char* filename) {
+
+    // 输出哈希值
+    char hash_str[41];
     size_t file_len;
     char* file_content = read_file(filename, &file_len);
     if (!file_content) {
@@ -126,8 +196,6 @@ void hash_object(const char* filename) {
     unsigned char hash[HASH_LEN];
     compute_sha1(data, total_len, hash);
 
-    // 输出哈希值
-    char hash_str[41];
     for (int i = 0; i < HASH_LEN; ++i) {
         snprintf(hash_str + i * 2, 3, "%02x", hash[i]);
     }
