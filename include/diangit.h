@@ -28,6 +28,13 @@
 	#include <sys/stat.h>
 	#include <errno.h>
 	#include <string.h>
+	// #include <dirent.h>  //实际上Windows也有这东西，不过我们已经实现了就不管他了
+#else
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <sys/stat.h>
+	#include <errno.h>
+	#include <string.h>
 #endif
 
 #endif // !_DIANGIT_H_

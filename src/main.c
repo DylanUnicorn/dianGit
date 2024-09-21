@@ -29,12 +29,12 @@ int main(int argc, char* argv[]) {
         }
         cat_file(argv[2]);
     }
-	else if (strcmp(argv[1], "commit") == 0) {
-		if (argc < 3) {
-			printf("Usage: %s commit <message>\n", argv[0]);
+	else if ((strcmp(argv[1], "commit") == 0)&&(strcmp(argv[2], "-m") == 0 )){
+		if (argc < 4) {
+			printf("Usage: %s commit -m <message>\n", argv[0]);
 			return 1;
 		}
-		commit_all(argv[2]);
+		commit_all(argv[3]);
 	}
 	else if (strcmp(argv[1], "log") == 0) {
 		if (argc > 2) {
@@ -56,6 +56,22 @@ int main(int argc, char* argv[]) {
 			return 1;
 		}
 		ls_tree(argv[2]);
+	}
+	else if (strcmp(argv[1], "branch") == 0) {
+		if (argv[2] == NULL) {
+			list_branches();
+		}
+		else {
+			create_branch(argv[2]);
+		}
+	}
+	else if (strcmp(argv[1], "tag") == 0) {
+		if (argv[2] == NULL) {
+			list_tags();
+		}
+		else {
+			create_tag(argv[2]);
+		}
 	}
     else {
         printf("Unknown command: %s\n", argv[1]);

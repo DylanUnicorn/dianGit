@@ -8,5 +8,6 @@
 #include <header/gitlog.h>
 #include <header/checkout.h>
 #include <header/ls_tree.h>
+#include <header/TagAndBranch.h>
 
 #endif

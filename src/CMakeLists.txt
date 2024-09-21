@@ -10,6 +10,7 @@ set(SOURCES
     checkout.c
     mytree.c
     ls_tree.c
+    TagAndBranch.c
 )
 
 # ´´½¨¾²Ì¬¿â

@@ -1,0 +1,23 @@
+# ninja log v5
+146	293	7486090209251271	test/CMakeFiles/dire.dir/tests/dire.c.obj	811883da99e0d4f1
+46	295	7486090209182839	src/CMakeFiles/my_modules.dir/gettime.c.obj	f76018164ff1250a
+96	322	7486090209573528	src/CMakeFiles/my_modules.dir/mytree.c.obj	592845847c0590c1
+7	326	7486090209641874	CMakeFiles/diangit.dir/src/main.c.obj	a52ae67d50c99cc5
+155	347	7486090209832770	test/CMakeFiles/zipAndUnzip.dir/tests/zipAndUnzip.c.obj	53d0e3f222cc8e49
+135	597	7486090212341727	test/CMakeFiles/dir.dir/tests/dir.c.obj	78eda562ef2e982
+115	601	7486090212361219	src/CMakeFiles/my_modules.dir/TagAndBranch.c.obj	3135f31a63e06216
+56	604	7486090212400293	src/CMakeFiles/my_modules.dir/dirPro.c.obj	a0dfa9b9be54ef3c
+125	611	7486090212468610	test/CMakeFiles/copyfileTest.dir/tests/copyfileTest.c.obj	3827c5bab1bd7896
+76	617	7486090212537138	src/CMakeFiles/my_modules.dir/gitlog.c.obj	49519609dc166152
+105	620	7486090212556610	src/CMakeFiles/my_modules.dir/ls_tree.c.obj	9b0ea6716788732b
+27	622	7486090212576143	src/CMakeFiles/my_modules.dir/hash_object.c.obj	5fafffc564be6611
+86	623	7486090212595663	src/CMakeFiles/my_modules.dir/checkout.c.obj	8f47e2ada6aafff
+67	627	7486090212644481	src/CMakeFiles/my_modules.dir/commit.c.obj	87bd91f41b1bf01f
+37	628	7486090212654237	src/CMakeFiles/my_modules.dir/cat_file.c.obj	196556fe4fbf9e03
+16	632	7486090212703412	src/CMakeFiles/my_modules.dir/init.c.obj	8affaa5b82ce385b
+632	718	7486090213523656	src/my_modules.lib	f37cd312db6fa368
+725	1842	7486090218711966	test/copyfileTest.exe	de3dec097d421d45
+742	1881	7486090218711966	test/dire.exe	8b866d33b40414d5
+732	1881	7486090218711966	test/dir.exe	6748932295ea33f4
+750	1948	7486090218711966	test/zipAndUnzip.exe	1723965494395843
+718	1965	7486090218731492	diangit.exe	a4097ac74f6708fa
