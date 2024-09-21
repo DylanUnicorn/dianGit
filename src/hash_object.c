@@ -1,5 +1,4 @@
 #include <openssl/sha.h>
-#include <zlib.h>
 #include <header/hash_object.h>
 #include <diangit.h>
 

@@ -9,5 +9,6 @@
 #include <header/checkout.h>
 #include <header/ls_tree.h>
 #include <header/TagAndBranch.h>
+#include <header/staging.h>
 
 #endif

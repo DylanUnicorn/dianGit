@@ -2,6 +2,7 @@
 #define __HASH_OBJECT_H__
 
 #include "init.h"
+#include <zlib.h>
 
 #define HASH_LEN 20 // SHA-1 Êä³ö 20 ×Ö½Ú
 #define CHUNK 16384

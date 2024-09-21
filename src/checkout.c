@@ -17,9 +17,12 @@ int check_for_conflicts(const char* work_dir, const char* file_path, const char*
 
     // 调用之前实现的 hashData 计算当前文件的哈希值
     char current_hash[41] = { 0 };
-    if (hashData(full_path, current_hash) == NULL) {
-		return 1; // 文件不存在，视为冲突
-    }
+    hashData(full_path, current_hash);
+    // 文件不存在视为冲突
+	if (current_hash[0] == '\0') {
+		return 1;
+	}
+
     // 如果文件哈希不一致，说明存在冲突
     return strcmp(current_hash, target_hash) != 0;
 }

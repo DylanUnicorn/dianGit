@@ -35,6 +35,13 @@ struct dirent* readdir(DIR* dirp) {
     }
 
     snprintf(entry.d_name, sizeof(entry.d_name), "%s", dirp->findFileData.cFileName);
+	if (dirp->findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+		entry.d_type = DT_DIR;
+	}
+	else {
+		entry.d_type = DT_REG;
+	}
+
     return &entry;
 }
 
@@ -93,3 +100,76 @@ int copy_file(const char* src, const char* dest) {
 
     return 0;
 }
+
+#ifdef _WIN32
+#include <ctype.h>
+#include <string.h>
+
+static int match(const char* pattern, const char* string, int flags) {
+    while (*pattern) {
+        if (*pattern == '*') {
+            pattern++;
+            if (!*pattern) {
+                return 1;
+            }
+            while (*string) {
+                if (match(pattern, string, flags)) {
+                    return 1;
+                }
+                string++;
+            }
+            return 0;
+        }
+        else if (*pattern == '?') {
+            if (!*string) {
+                return 0;
+            }
+        }
+        else if (*pattern == '[') {
+            pattern++;
+            int negate = (*pattern == '!');
+            if (negate) {
+                pattern++;
+            }
+            int match = 0;
+            while (*pattern && *pattern != ']') {
+                if (*pattern == '-' && pattern[1] != ']' && pattern[-1] != '[') {
+                    if (*string >= pattern[-1] && *string <= pattern[1]) {
+                        match = 1;
+                    }
+                    pattern++;
+                }
+                else if (*pattern == *string) {
+                    match = 1;
+                }
+                pattern++;
+            }
+            if (negate) {
+                match = !match;
+            }
+            if (!match) {
+                return 0;
+            }
+        }
+        else {
+            if ((flags & FNM_PATHNAME) && (*pattern == '/' || *string == '/')) {
+                if (*pattern != *string) {
+                    return 0;
+                }
+            }
+            else if (tolower(*pattern) != tolower(*string)) {
+                return 0;
+            }
+        }
+        pattern++;
+        string++;
+    }
+    return !*string;
+}
+
+int fnmatch(const char* pattern, const char* string, int flags) {
+    return match(pattern, string, flags) ? 0 : FNM_NOMATCH;
+}
+
+
+#endif // !_WIN32

@@ -11,6 +11,7 @@ set(SOURCES
     mytree.c
     ls_tree.c
     TagAndBranch.c
+    staging.c
 )
 
 # ´´½¨¾²Ì¬¿â

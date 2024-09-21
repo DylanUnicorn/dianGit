@@ -3,6 +3,10 @@
 
 #ifdef _WIN32
 #include <windows.h>
+
+#define DT_DIR 4
+#define DT_REG 8
+
 typedef struct {
 	HANDLE hFind;
 	WIN32_FIND_DATA findFileData;
@@ -10,6 +14,7 @@ typedef struct {
 }DIR;
 struct dirent {
 	char d_name[MAX_PATH];
+	unsigned char d_type;
 };
 DIR* opendir(const char* name);
 struct dirent* readdir(DIR* dirp);
@@ -18,6 +23,7 @@ int closedir(DIR* dirp);
 #include <dirent.h>
 #include <fcntl.h>  //文件控制定义
 #include <unistd.h> //unix标准函数定义
+#include <fnmatch.h> //文件名匹配
 #endif
 
 /**
@@ -28,4 +34,12 @@ int closedir(DIR* dirp);
 */
 int copy_file(const char* src, const char* dst);
 
+
 #endif // !_DIRPRO_H_
+
+#ifdef _WIN32
+#define FNM_PATHNAME 0x01
+#define FNM_NOMATCH 1
+int fnmatch(const char* pattern, const char* string, int flags);
+#else
+#endif

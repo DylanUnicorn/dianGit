@@ -73,6 +73,51 @@ int main(int argc, char* argv[]) {
 			create_tag(argv[2]);
 		}
 	}
+	else if (strcmp(argv[1], "add") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s add <file>\n", argv[0]);
+			return 1;
+		}
+		add_file_to_index(argv[2]);
+	}
+	else if (strcmp(argv[1], "status") == 0) {
+		if (argc > 2) {
+			printf("Usage: %s status\n", argv[0]);
+			return 1;
+		}
+		status();
+	}
+	else if (strcmp(argv[1], "rm") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s rm <file>\n", argv[0]);
+			return 1;
+		}
+		remove_file_from_index(argv[2]);
+	}
+	else if (strcmp(argv[1], "ls-files") == 0) {
+		//if (argc < 3) {
+		//	printf("Usage: %s ls-files <file> (--verbose)\n", argv[0]);
+		//	return 1;
+		//}
+		//else {
+			int verbose = 0;
+			if (argc == 3 && strcmp(argv[3], "--verbose") == 0) {
+				verbose = 1;
+			}
+			else if (argc > 3) {
+				printf("Usage: %s ls-files (--verbose)\n", argv[0]);
+				return 1;
+			}
+			list_staged_files(verbose);
+		//}
+	}
+	else if (strcmp(argv[1], "check-ignore") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s check-ignore <file>\n", argv[0]);
+			return 1;
+		}
+		checkignore(argv[2]);
+	}
     else {
         printf("Unknown command: %s\n", argv[1]);
     }
