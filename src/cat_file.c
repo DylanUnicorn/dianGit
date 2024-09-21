@@ -2,6 +2,11 @@
 #include <diangit.h>
 
 // 解压数据
+// @parm input 输入数据
+// @parm input_len 输入数据长度
+// @parm output 输出数据
+// @parm output_len 输出数据长度
+// @return 0:成功，-1:失败
 int decompress_data(const char* input, size_t input_len, char** output, size_t* output_len) {
     z_stream strm;
     int ret;
@@ -54,6 +59,40 @@ int decompress_data(const char* input, size_t input_len, char** output, size_t* 
     inflateEnd(&strm);
     return ret == Z_STREAM_END ? Z_OK : ret;
 }
+
+// 重写一个功能相似的read_compressed_object，只不过只需要传入路径和解压后的文件和文件长度
+int read_compressed_object(const char* file, char** decompressed_data, size_t* decompressed_len) {
+	FILE* f = fopen(file, "rb");
+	if (!f) {
+		perror("Failed to open object file");
+		return -1;
+	}
+
+	fseek(f, 0, SEEK_END);
+	size_t file_len = ftell(f);
+	fseek(f, 0, SEEK_SET);
+
+	char* compressed_data = malloc(file_len);
+	if (compressed_data == NULL) {
+		perror("Failed to allocate memory");
+		fclose(f);
+		return -1;
+	}
+
+	fread(compressed_data, 1, file_len, f);
+	fclose(f);
+
+	if (decompress_data(compressed_data, file_len, decompressed_data, decompressed_len) != Z_OK) {
+		perror("Failed to decompress object\n");
+		free(compressed_data);
+		return -1;
+	}
+
+	free(compressed_data);
+	return 0;
+}
+
+
 
 // cat-file 功能
 void cat_file(const char* hash) {

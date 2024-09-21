@@ -7,6 +7,9 @@ set(SOURCES
     dirPro.c
     commit.c
     gitlog.c
+    checkout.c
+    mytree.c
+    ls_tree.c
 )
 
 # ´´½¨¾²Ì¬¿â

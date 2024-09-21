@@ -25,13 +25,16 @@ char* create_tree_object(const char* dirpath) {
         struct stat entry_stat;
         if (stat(filepath, &entry_stat) == 0) {
             if (S_ISDIR(entry_stat.st_mode)) {
+                // 保存当前目录名称
+                char* current_dir = strdup(entry->d_name);
                 // 如果是子目录，递归生成树对象
                 char* subtree_hash = create_tree_object(filepath);
                 // 追加树条目
                 char entry_buffer[512];
-                snprintf(entry_buffer, sizeof(entry_buffer), "040000 tree %s\t%s\n", subtree_hash, entry->d_name);
+                snprintf(entry_buffer, sizeof(entry_buffer), "040000 tree %s\t%s\n", subtree_hash, current_dir);
                 strcat(tree_content, entry_buffer);
                 free(subtree_hash);
+				free(current_dir);
             }
             else if (S_ISREG(entry_stat.st_mode)) {
                 // 如果是文件，生成 blob 对象
@@ -47,11 +50,20 @@ char* create_tree_object(const char* dirpath) {
     closedir(dir);
 
     // 计算树对象的哈希值并存储
-    char tree_hash[41];
+    char tree_hash[HASH_LEN];
     compute_sha1(tree_content, strlen(tree_content), tree_hash);
-    store_object(tree_hash, tree_content, strlen(tree_content));
 
-    return strdup(tree_hash);  // 返回树对象的哈希值
+    // 压缩并存储tree对象
+    char* compressed_data = NULL;
+    size_t compressed_len = 0;
+    char hash_str[41];
+	if (compress_data(tree_content, strlen(tree_content), &compressed_data, &compressed_len) == Z_OK) {
+        hash_to_str(tree_hash, hash_str);
+        store_object(hash_str, compressed_data, compressed_len);
+		free(compressed_data);
+	}
+
+    return strdup(hash_str);  // 返回树对象的哈希值字符串
 }
 
 void create_commit_object(const char* commit_msg, const char* tree_hash) {
@@ -71,9 +83,7 @@ void create_commit_object(const char* commit_msg, const char* tree_hash) {
     size_t compressed_len = 0;
     if (compress_data(commit_data, strlen(commit_data), &compressed_data, &compressed_len) == Z_OK) {
         char hash_str[41];
-        for (int i = 0; i < HASH_LEN; ++i) {
-            snprintf(hash_str + i * 2, 3, "%02x", commit_hash[i]);
-        }
+		hash_to_str(commit_hash, hash_str);
 
         store_object(hash_str, compressed_data, compressed_len);
         free(compressed_data);

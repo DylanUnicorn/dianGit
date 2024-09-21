@@ -4,6 +4,9 @@ E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/CMakeFiles/rebuild_cache.di
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/src/CMakeFiles/my_modules.dir
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
+E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/copyfileTest.dir
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/dir.dir
+E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/dire.dir
+E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/zipAndUnzip.dir
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/edit_cache.dir
 E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Debug/test/CMakeFiles/rebuild_cache.dir

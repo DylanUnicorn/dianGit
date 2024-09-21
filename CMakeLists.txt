@@ -23,7 +23,7 @@ add_subdirectory(src)
 # add_subdirectory(lib/third_party_lib)
 
 # 添加可执行文件
-add_executable(diangit src/main.c)
+add_executable(diangit src/main.c "include/header/checkout.h" "include/header/mytree.h")
 
 # 链接第三方库
 target_link_libraries(diangit PUBLIC my_modules ZLIB::ZLIB ${OPENSSL_LIBRARIES})

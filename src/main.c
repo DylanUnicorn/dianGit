@@ -43,6 +43,20 @@ int main(int argc, char* argv[]) {
 		}
         display_log();
 	}
+	else if (strcmp(argv[1], "checkout") == 0) {
+		if (argv[2] == NULL) {
+			printf("Usage: %s checkout <hash>\n", argv[0]);
+			return 1;
+		}
+		checkout(argv[2]);
+	}
+	else if (strcmp(argv[1], "ls-tree") == 0) {
+		if (argv[2] == NULL) {
+			printf("Usage: %s ls-tree <hash>\n", argv[0]);
+			return 1;
+		}
+		ls_tree(argv[2]);
+	}
     else {
         printf("Unknown command: %s\n", argv[1]);
     }

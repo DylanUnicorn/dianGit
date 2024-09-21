@@ -1,4 +1,5 @@
 #include <header/dirPro.h>
+#include <stdio.h>
 
 #ifdef _WIN32
 
@@ -48,3 +49,47 @@ int closedir(DIR* dirp) {
 }
 
 #endif
+
+
+int copy_file(const char* src, const char* dest) {
+#ifdef _WIN32
+    if (!CopyFile(src, dest, FALSE)) {
+        fprintf(stderr, "Failed to copy file: %lu\n", GetLastError());
+        return -1;
+    }
+#else
+    int src_fd = open(src, O_RDONLY);
+    if (src_fd < 0) {
+        perror("Failed to open source file");
+        return -1;
+    }
+
+    int dest_fd = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (dest_fd < 0) {
+        perror("Failed to open destination file");
+        close(src_fd);
+        return -1;
+    }
+
+    char buffer[4096];
+    ssize_t bytes_read, bytes_written;
+    while ((bytes_read = read(src_fd, buffer, sizeof(buffer))) > 0) {
+        bytes_written = write(dest_fd, buffer, bytes_read);
+        if (bytes_written != bytes_read) {
+            perror("Failed to write to destination file");
+            close(src_fd);
+            close(dest_fd);
+            return -1;
+        }
+    }
+
+    if (bytes_read < 0) {
+        perror("Failed to read from source file");
+    }
+
+    close(src_fd);
+    close(dest_fd);
+#endif
+
+    return 0;
+}

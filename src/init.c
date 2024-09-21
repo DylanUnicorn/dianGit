@@ -16,6 +16,32 @@ void create_file(const char* path, const char* content) {
     }
 }
 
+// 创建二进制文件并写入内容
+int create_binary_file(const char* path, const void* data, size_t len) {
+    FILE* file = fopen(path, "wb");
+    if (!file) {
+        perror("Failed to create file");
+        return -1;
+    }
+
+    if (data) {
+        size_t written = fwrite(data, 1, len, file);
+        if (written != len) {
+            perror("Failed to write complete data to file");
+            fclose(file);
+            return -1;
+        }
+    }
+
+    if (fclose(file) != 0) {
+        perror("Failed to close file");
+        return -1;
+    }
+
+    return 0;
+}
+
+
 // 检查目录是否存在
 int directory_exists(const char* dir) {
     struct stat st;

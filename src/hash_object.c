@@ -8,7 +8,8 @@
 char* read_file(const char* filename, size_t* file_len) {
     FILE* file = fopen(filename, "rb");
     if (!file) {
-        perror("Failed to open file");
+        perror("Failed to open file ");
+		printf("***fail: %s\n", filename);
         return NULL;
     }
 
@@ -35,6 +36,15 @@ void compute_sha1(const char* data, size_t data_len, unsigned char* hash_out) {
     SHA1_Init(&ctx);
     SHA1_Update(&ctx, data, data_len);
     SHA1_Final(hash_out, &ctx);
+}
+
+// @brief 提供将哈希值转换为字符串的函数
+// @brief 传入哈希值和字符串指针
+// @brief 配合compute_sha1使用
+void hash_to_str(const unsigned char* hash, char* hash_str) {
+    for (int i = 0; i < HASH_LEN; ++i) {
+        snprintf(hash_str + i * 2, 3, "%02x", hash[i]);
+    }
 }
 
 // 压缩文件内容
@@ -102,12 +112,12 @@ void store_object(const char* hash, const char* compressed_data, size_t compress
     printf("Object stored: %s\n", file);
 }
 
-// 计算文件的哈希值,给与返回值
-void hashData(const char* filename, char* hash_out) {
+// 计算文件的哈希值,给与返回值,假如文件不存在,返回NULL
+int hashData(const char* filename, char* hash_out) {
 	size_t file_len;
 	char* file_content = read_file(filename, &file_len);
 	if (!file_content) {
-		return;
+		return NULL;
 	}
 
 	// 计算哈希值
