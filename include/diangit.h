@@ -12,6 +12,7 @@
 	#define IS_DIR(attrs) (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY))
 	#define S_ISDIR(mode)  (((mode) & S_IFMT) == S_IFDIR)
 	#define S_ISREG(mode)  (((mode) & S_IFMT) == S_IFREG)
+	#define IS_REG(attrs) (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY) == 0)
 #else
 	#include <unistd.h>
 	#include <sys/stat.h>

@@ -62,7 +62,7 @@ int main()
 	//free(tree_hash);
 	char* object_data = NULL;
 	size_t object_len = 0;
-	read_compressed_object("E:/Hust/Memo/oneDianDian/test/.git/objects/c70678ca2f27c20e12bbe837743fcd280fdd7386", &object_data, &object_len);
+	read_compressed_object("E:/Hust/Memo/oneDianDian/test/.git/objects/0c538906875137975ff08d24708bbacf2bac4dbb", &object_data, &object_len);
 	printf("commit_data: %s\n", object_data);
 	return 0;
 }

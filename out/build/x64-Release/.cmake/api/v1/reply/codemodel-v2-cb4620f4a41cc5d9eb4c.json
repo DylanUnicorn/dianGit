@@ -1,0 +1,140 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "src",
+					"jsonFile" : "directory-src-RelWithDebInfo-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "test",
+					"jsonFile" : "directory-test-RelWithDebInfo-f18be1977b403cfd1a50.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "test",
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3,
+						5
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "diangit",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "copyfileTest::@36f028580bb02cc8272a",
+					"jsonFile" : "target-copyfileTest-RelWithDebInfo-0f63219d40c4aa57e488.json",
+					"name" : "copyfileTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "diangit::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-diangit-RelWithDebInfo-10023dfe156f17f49cc7.json",
+					"name" : "diangit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dir::@36f028580bb02cc8272a",
+					"jsonFile" : "target-dir-RelWithDebInfo-d3da25c1b73bcab7e430.json",
+					"name" : "dir",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "dire::@36f028580bb02cc8272a",
+					"jsonFile" : "target-dire-RelWithDebInfo-6d46ee326e1808df8d5e.json",
+					"name" : "dire",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "my_modules::@145eef247bfb46b6828c",
+					"jsonFile" : "target-my_modules-RelWithDebInfo-b787ed261e2f4d404346.json",
+					"name" : "my_modules",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "zipAndUnzip::@36f028580bb02cc8272a",
+					"jsonFile" : "target-zipAndUnzip-RelWithDebInfo-c3e3211fbf0f46c0059b.json",
+					"name" : "zipAndUnzip",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/Hust/Memo/oneDianDian/dianGit/out/build/x64-Release",
+		"source" : "E:/Hust/Memo/oneDianDian/dianGit"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

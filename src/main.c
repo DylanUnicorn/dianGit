@@ -29,12 +29,19 @@ int main(int argc, char* argv[]) {
         }
         cat_file(argv[2]);
     }
-	else if ((strcmp(argv[1], "commit") == 0)&&(strcmp(argv[2], "-m") == 0 )){
+	else if ((strcmp(argv[1], "commit-now") == 0) && (strcmp(argv[2], "-m") == 0)) {
+		if (argc < 4) {
+			printf("Usage: %s commit-now -m <message>\n", argv[0]);
+			return 1;
+		}
+		commit_all(argv[3]);
+	}
+	else if ((strcmp(argv[1], "commit") == 0) && (strcmp(argv[2], "-m") == 0)) {
 		if (argc < 4) {
 			printf("Usage: %s commit -m <message>\n", argv[0]);
 			return 1;
 		}
-		commit_all(argv[3]);
+		commit_stash(argv[3]);
 	}
 	else if (strcmp(argv[1], "log") == 0) {
 		if (argc > 2) {
@@ -95,13 +102,8 @@ int main(int argc, char* argv[]) {
 		remove_file_from_index(argv[2]);
 	}
 	else if (strcmp(argv[1], "ls-files") == 0) {
-		//if (argc < 3) {
-		//	printf("Usage: %s ls-files <file> (--verbose)\n", argv[0]);
-		//	return 1;
-		//}
-		//else {
 			int verbose = 0;
-			if (argc == 3 && strcmp(argv[3], "--verbose") == 0) {
+			if (argc == 3 && strcmp(argv[2], "--verbose") == 0) {
 				verbose = 1;
 			}
 			else if (argc > 3) {
@@ -109,7 +111,6 @@ int main(int argc, char* argv[]) {
 				return 1;
 			}
 			list_staged_files(verbose);
-		//}
 	}
 	else if (strcmp(argv[1], "check-ignore") == 0) {
 		if (argc < 3) {

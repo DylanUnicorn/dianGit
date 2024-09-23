@@ -168,7 +168,7 @@ char* create_blob_object(const char* filename) {
 		snprintf(hash_out + i * 2, 3, "%02x", hash[i]);
 	}
 
-    // 压缩数据
+    // 压缩并存储数据
     char* compressed_data = NULL;
     size_t compressed_len = 0;
     if (compress_data(data, total_len, &compressed_data, &compressed_len) == Z_OK) {

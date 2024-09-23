@@ -14,7 +14,7 @@ set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRIN
 
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_path(DIRENT_INCLUDE_DIRS "dirent.h")
+find_path(INCLUDE_DIRS "dirent.h" "utarray.h")
 
 # 包含include目录
 include_directories(${PROJECT_SOURCE_DIR}/include ${OPENSSL_INCLUDE_DIR} ${ZLIB_INCLUDE_DIRS})
@@ -27,6 +27,6 @@ add_subdirectory(src)
 add_executable(diangit src/main.c "include/header/checkout.h" "include/header/mytree.h" "include/header/TagAndBranch.h" "include/header/staging.h")
 
 # 链接第三方库
-target_link_libraries(diangit PUBLIC my_modules ZLIB::ZLIB ${OPENSSL_LIBRARIES} PRIVATE ${DIRENT_INCLUDE_DIRS})
+target_link_libraries(diangit PUBLIC my_modules ZLIB::ZLIB ${OPENSSL_LIBRARIES} PRIVATE ${INCLUDE_DIRS})
 
 add_subdirectory(test)

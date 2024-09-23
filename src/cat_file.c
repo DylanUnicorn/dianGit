@@ -61,6 +61,7 @@ int decompress_data(const char* input, size_t input_len, char** output, size_t* 
 }
 
 // 重写一个功能相似的read_compressed_object，只不过只需要传入路径和解压后的文件和文件长度
+// @brief 记得手动释放decompressed_data
 int read_compressed_object(const char* file, char** decompressed_data, size_t* decompressed_len) {
 	FILE* f = fopen(file, "rb");
 	if (!f) {
@@ -82,11 +83,16 @@ int read_compressed_object(const char* file, char** decompressed_data, size_t* d
 	fread(compressed_data, 1, file_len, f);
 	fclose(f);
 
-	if (decompress_data(compressed_data, file_len, decompressed_data, decompressed_len) != Z_OK) {
-		perror("Failed to decompress object\n");
-		free(compressed_data);
-		return -1;
+	if (decompress_data(compressed_data, file_len, decompressed_data, decompressed_len) == Z_OK) {
+        // printf("%s success!!", file);
 	}
+#ifdef _DEBUG
+    else {
+        perror("Failed to decompress object\n");
+        free(compressed_data);
+        return -1;
+    }
+#endif
 
 	free(compressed_data);
 	return 0;

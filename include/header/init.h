@@ -16,6 +16,10 @@ void create_file(const char* path, const char* content);
 // @return 0 成功 -1 失败
 int create_binary_file(const char* path, const void* data, size_t len);
 
+// 检查文件是否存在
+// @return 0 : 存在 1:不存在
+int file_exists(const char* file);
+
 // 检查目录是否存在
 int directory_exists(const char* dir);
 

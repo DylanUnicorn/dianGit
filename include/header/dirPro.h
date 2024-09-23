@@ -34,6 +34,8 @@ int closedir(DIR* dirp);
 */
 int copy_file(const char* src, const char* dst);
 
+// 判断文件是否存在
+int file_exists(const char* path);
 
 #endif // !_DIRPRO_H_
 

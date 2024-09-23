@@ -122,35 +122,69 @@ void restore_tree_with_conflicts(const char* tree_hash, const char* restore_dir)
         printf("Failed to read tree object.\n");
         return;
     }
-    
+
+#ifdef TRY1
     // 解析 tree 对象，逐行读取
     char* line = strtok(tree_data, "\n");
-	char* next_line = NULL;
     while (line) {
         char mode[7], type[5], hash[41], filename[1024];
         if (sscanf(line, "%s %s %40s\t%s", mode, type, hash, filename) != 4) {
-			printf("sscanf error in restore_tree_with_conflicts function\n");
+            printf("sscanf error in restore_tree_with_conflicts function\n");
         }
 
-		next_line = strtok(NULL, "\n");
+        if (strcmp(type, "blob") == 0) {
+            if (handle_conflicts(restore_dir, filename, hash)) {
+#ifdef _DEBUG
+				printf("!!!Restoring blob: %s\n", filename);
+#endif
+                restore_blob(hash, restore_dir, filename);
+            }
+#ifdef _DEBUG
+			else {
+				printf("!!!Conflict Detected,Skipped file: %s\n", filename);
+
+			}
+#endif
+        }
+        else if (strcmp(type, "tree") == 0) {
+            char subdir[1024];
+            snprintf(subdir, sizeof(subdir), "%s/%s", restore_dir, filename);
+            create_directory(subdir);
+            restore_tree_with_conflicts(hash, subdir);
+        }
+
+        line = strtok(NULL, "\n");  // 使用 strtok_r 来解析下一行
+    }
+#else
+    char* line = tree_data;
+    while (line < tree_data + tree_len) {
+        char* newline_pos = strchr(line, '\n');
+        if (!newline_pos) {
+            break;  // 没有更多的换行符，退出循环
+        }
+        *newline_pos = '\0';  // 将换行符替换为 null 终止符，形成完整的一行
+
+        char mode[7], type[5], hash[41], filename[1024];
+        if (sscanf(line, "%s %s %40s %s", mode, type, hash, filename) != 4) {
+            printf("sscanf error in restore_tree_with_conflicts function\n");
+        }
 
         if (strcmp(type, "blob") == 0) {
-            // 处理冲突并还原 blob 文件，使用 restore_blob 函数
             if (handle_conflicts(restore_dir, filename, hash)) {
                 restore_blob(hash, restore_dir, filename);
             }
         }
         else if (strcmp(type, "tree") == 0) {
-            // 递归还原子目录，处理冲突
             char subdir[1024];
             snprintf(subdir, sizeof(subdir), "%s/%s", restore_dir, filename);
             create_directory(subdir);
             restore_tree_with_conflicts(hash, subdir);
-            line = next_line;
-            continue;
         }
-        line = next_line;
+
+        line = newline_pos + 1;  // 移动到下一行
     }
+
+#endif
     free(tree_data);
 }
 
@@ -260,7 +294,11 @@ void checkout(const char* commit_hash) {
 
     char* tree_hash = get_tree_hash_from_commit(commit_hash);
     if (tree_hash) {
-        restore_tree_with_conflicts(tree_hash, "E:/Hust/Memo/oneDianDian/test");
+#ifdef _DEBUG
+		printf("Restoring files... treehash: %s\n", tree_hash);
+#endif
+
+        restore_tree_with_conflicts(tree_hash, ".");
         printf("Checkout complete.\n");
         free(tree_hash);
     }

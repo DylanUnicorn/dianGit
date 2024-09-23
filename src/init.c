@@ -16,6 +16,8 @@ void create_file(const char* path, const char* content) {
     }
 }
 
+
+
 // 创建二进制文件并写入内容
 int create_binary_file(const char* path, const void* data, size_t len) {
     FILE* file = fopen(path, "wb");
@@ -46,6 +48,13 @@ int create_binary_file(const char* path, const void* data, size_t len) {
 int directory_exists(const char* dir) {
     struct stat st;
     return stat(dir, &st) == 0 && IS_DIR(st.st_mode);
+}
+
+// 检查文件是否存在
+// @return 文件存在的时候返回1
+int file_exists(const char* file) {
+	struct stat st;
+	return stat(file, &st) == 0;
 }
 
 //创建目录并确保所有父目录都存在
