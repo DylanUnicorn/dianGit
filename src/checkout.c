@@ -105,7 +105,7 @@ void restore_blob(const char* blob_hash, const char* restore_dir, const char* fi
 	snprintf(restore_path, sizeof(restore_path), "%s/%s", restore_dir, filename);
 
 	// 使用之前的 write_file 函数写入文件
-    create_binary_file(restore_path, content, blob_len - (content - blob_data));
+    create_binary_file(restore_path, content + strlen(content) +1, blob_len - (content - blob_data) - strlen(content) -1);
 	free(blob_data);
 }
 
